@@ -5,4 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print variables in env and secret
-        run: echo "$secrets.SECRET_ON_GH"
+        env:
+          MY_VAR: ${{vars.VAR_ON_GH}}
+          MY_SECRET: ${{secrets.SECRET_ON_GH}}
+        run: |
+          echo "Variable value: $MY_VAR"
+          echo "Secret value: $MY_SECRET"
+          echo "Direct variable: ${{ vars.VAR_ON_GH }}"
