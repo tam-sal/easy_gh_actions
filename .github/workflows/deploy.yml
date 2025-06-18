@@ -57,6 +57,11 @@ jobs:
   fifth_job_notify:
     if: ${{ always() }}
     runs-on: ubuntu-latest
+    needs:
+      - first_job
+      - second_job
+      - third_job_build_test
+      - fourth_job_deploy
     steps:
       - name: notifier
         run: echo "notifications, always works even if prior jobs failed"
