@@ -30,7 +30,7 @@ jobs:
       - name: Test redis
         run: redis-cli -h localhost -p 6379 ping
 ############################################################
-  third_job:
+  third_job_build_test:
     runs-on: ubuntu-latest
     steps:
       - name: clone repo to instance and checks out to main dir
@@ -44,3 +44,12 @@ jobs:
         run: npm install
       - name: running app tests
         run: npm run test
+############################################################
+  fourth_job_deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - first_job
+      - third_job_build_test
+    steps:
+      - name: deploy
+        run: echo "Deploying.." 
