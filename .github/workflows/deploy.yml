@@ -12,3 +12,4 @@ jobs:
           echo "Variable value: $MY_VAR"
           echo "Secret value: $MY_SECRET"
           echo "Direct variable: ${{ vars.VAR_ON_GH }}"
+          echo "Direct secret: ${{ secrets.SECRET_ON_GH }}"
