@@ -40,10 +40,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+
       - name: install dependencies
         run: npm install
+
       - name: running app tests
         run: npm run test
+
+      - name: Build app output
+        run: npm run build
 ############################################################
   fourth_job_deploy:
     runs-on: ubuntu-latest
