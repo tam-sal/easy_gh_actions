@@ -52,4 +52,11 @@ jobs:
       - third_job_build_test
     steps:
       - name: deploy
-        run: echo "Deploying.." 
+        run: echo "Deploying.."
+############################################################
+  fifth_job_notify:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: notifier
+        run: echo "notifications, always works even if prior jobs failed"
