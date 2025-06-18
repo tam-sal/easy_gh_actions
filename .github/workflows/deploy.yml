@@ -49,6 +49,11 @@ jobs:
 
       - name: Build app output
         run: npm run build
+      
+      - name: updalod artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public/
 ############################################################
   fourth_job_deploy:
     runs-on: ubuntu-latest
