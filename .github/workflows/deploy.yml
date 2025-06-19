@@ -31,7 +31,11 @@ jobs:
         run: redis-cli -h localhost -p 6379 ping
 ############################################################
   third_job_build_test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [18, 20]
     steps:
       - name: clone repo to instance and checks out to main dir
         uses: actions/checkout@v4
@@ -39,7 +43,7 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ matrix.node }}
 
       - name: install dependencies
         run: npm install
@@ -51,6 +55,7 @@ jobs:
         run: npm run build
       
       - name: updalod artifact
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node == 18 }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: public/
